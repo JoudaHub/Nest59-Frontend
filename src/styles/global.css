@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "./components.css";
+@import "./pages.css";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   LIGHT MODE (DEFAULT)
+========================================================= */
+:root {
+  /* Primary Colors */
+  --v: #7c3aed;
+  --v-light: #f3e8ff;
+  --v-mid: #c4b5fd;
+  --v-dark: #6d28d9;
+  --v-deep: #4c1d95;
+
+  /* Backgrounds */
+  --bg: #ffffff;
+  --bg2: #faf7ff;
+  --bg3: #f4efff;
+  --surface: #ffffff;
+
+  /* Text */
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+
+  /* Borders */
+  --border: #e9d5ff;
+  --border2: #d8b4fe;
+
+  /* Code Blocks */
+  --code-bg: #0f172a;
+  --code-text: #bae6fd;
+
+  /* Radius */
+  --r: 12px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+  --pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(124, 58, 237, 0.08);
+  --shadow: 0 6px 18px rgba(124, 58, 237, 0.12);
+  --shadow-lg: 0 12px 36px rgba(124, 58, 237, 0.16);
+
+  /* Fonts */
+  --sans: 'Open Sans', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+/* =========================================================
+   DARK MODE
+   IMPORTANT: your JS adds class to <html>
+   document.documentElement.classList.add("dark")
+========================================================= */
+html.dark {
+  /* Primary Colors */
+  --v: #8b5cf6;
+  --v-light: rgba(139, 92, 246, 0.12);
+  --v-mid: #a78bfa;
+  --v-dark: #c4b5fd;
+  --v-deep: #ddd6fe;
+
+  /* Backgrounds */
+  --bg: #0b1120;
+  --bg2: #0f172a;
+  --bg3: #1e293b;
+  --surface: #111827;
+
+  /* Text */
+  --text: #f8fafc;
+  --text2: #cbd5e1;
+  --text3: #94a3b8;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border2: rgba(255, 255, 255, 0.14);
+
+  /* Code Blocks */
+  --code-bg: #020617;
+  --code-text: #bae6fd;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg2);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 2000px;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(124, 58, 237, 0.45);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s ease both;
+}
+
+.slide-down {
+  animation: slideDown 0.25s ease both;
+  overflow: hidden;
+}
+
+.spin-anim {
+  animation: spin 0.75s linear infinite;
+}
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+.page-wrap {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--v-dark);
+}
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.spinner-full {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.spinner-inline {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.alert-error {
+  background: #fff5f5;
+  border: 1.5px solid #fecaca;
+  color: #991b1b;
+  border-radius: var(--r);
+  padding: 0.85rem 1rem;
+  font-size: 13px;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+html.dark .alert-error {
+  background: rgba(127, 29, 29, 0.18);
+  border-color: rgba(248, 113, 113, 0.3);
+  color: #fca5a5;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-v {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--v), var(--v-dark));
+  color: #fff;
+  border: 1.5px solid var(--v);
+  border-radius: var(--pill);
+  padding: 8px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-v:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.btn-v:active {
+  transform: scale(0.97);
+}
+
+.btn-v:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Outline Button */
+
+.btn-outline-sm {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--v-dark);
+  border: 1.5px solid var(--v-mid);
+  border-radius: var(--pill);
+  padding: 8px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-sm:hover {
+  background: var(--v-light);
+  border-color: var(--v);
+}
+
+/* Ghost Button */
+
+.btn-ghost {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--pill);
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--bg3);
+  border-color: var(--border2);
+}
+
+/* Small Ghost */
+
+.btn-ghost-sm {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text3);
+  border: 1px solid var(--border);
+  border-radius: var(--pill);
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+/* Small Violet */
+
+.btn-v-sm {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  background: var(--v);
+  color: #fff;
+  border: none;
+  border-radius: var(--pill);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-v-sm:hover {
+  background: var(--v-dark);
+}
+
+.btn-v-sm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.act-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text3);
+  padding: 6px 12px;
+  border-radius: var(--pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.act-btn:hover {
+  background: var(--v-light);
+  color: var(--v-dark);
+}
+
+.act-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.act-btn.liked,
+.act-btn.active {
+  color: var(--v-dark);
+  background: var(--v-light);
+}
+
+/* =========================================================
+   ICON BUTTON
+========================================================= */
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--r);
+  color: var(--text3);
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: var(--bg3);
+  color: var(--text2);
+}
+
+.danger-btn:hover {
+  background: #fff1f2;
+  color: #dc2626;
+}
+
+/* =========================================================
+   SKELETON
+========================================================= */
+
+.skel-card {
+  height: 220px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(
+    90deg,
+    var(--bg) 25%,
+    var(--bg2) 50%,
+    var(--bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-spinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
